@@ -1,0 +1,119 @@
+---
+title: "Untitled"
+author: "Puja Raj"
+date: "11/7/2020"
+output: ioslides_presentation
+---
+## 6C6o6u6r6s6e6r6a6 R6e6p6r6o6d6u6c6i6b6l6e 6P6i6t6c6h6
+
+### 6D6a6t6a 6S6e6t6 6o6b6t6a6i6n6e6d6 6f6r6o6m6 6C6o6u6r6s6e6r6a6 6R6e6g6r6e6s6s6i6o6n6 6m6o6d6e6l6 6c6o6u6r6s6e6 
+
+##### 6m6y6 6g6i6t6h6u6b6 6r6e6p6o6s6i6t6o6r6y6 6l6i6n6k
+
+---
+
+## A=n=a=l=y=s=i=s= =-= =M=a=i=n= =C=o=d=e= =(=U=I= =P=ar=t=)
+
+
+```r
+#####################################################################
+#
+# T-h-i-s- i-s- -t-h-e- -u-s-e-r---in--t-e-r-f-a-c-e- -d-e-f-i-n-i-t-i-o-n -o-f- -a- -S-h-i-n-y- -w-e-b- -a-p-p-l-i-c-a-t-i-o-n-.- -Y-o-u- -c-a-n-
+#- -r-u-n- -t-h-e- -a-p-p-l-i-c-a-t-i-o-n- -b-y- -c-l-i-c-k-i-n-g- -'-R-u-n- -A-pp-'- -a-b-o-v-e-.-
+#
+# -F-i-n--d -o-u-t- -m-o-r-e- -a-b-o-u-t- -b-u-i-l-d-i-n-g- -a-p-p-l-i-c-a-t-i-o-n-s- -w-i-t-h -S-h-i-n-y- -h-e-r-e-:-
+#
+#    http://shiny.rstudio.com/
+#
+
+library(shiny)
+
+# -D-e-f-i-n-e- -U-I- -f--o-r- -a-p-p-l-i-c-a-t-i-o-n- -t-h-a-t- -d-r-a-w-s- -a- -h-i-s-t-o-g-r-a-m
+shinyUI(
+    pageWithSidebar(
+        
+        headerPanel("Book prediction"),
+        sidebarPanel(
+            textInput('m4ood', label="what do you want to read ?(turn the capslock button off)"),
+            textInput('m4ovie', label="sitcom genre (turn the capslock button off)"),
+            submitButton('Submit')
+        ),
+        mainPanel(
+            h3('Results of Book,sitcom'),
+            h4('whats your mood'),
+            verbatimTextOutput("iinputValue"),
+            h4('the genre you typed'),
+            verbatimTextOutput("iinputValue2"),
+            h4('great then you can now read this book '),
+            verbatimTextOutput("pprediction"),
+            h4('you can also enjoy this sitcom'),
+            verbatimTextOutput("pprediction2")
+        )
+    )
+)
+```
+
+## Analysis - Main Code (Server Part)
+
+
+```r
+#####################################################################
+#
+# This is the server logic of a Shiny web application. You can run the
+# application by clicking 'Run App' above.
+#
+# Find out more about building applications with Shiny here:
+#
+#    http://shiny.rstudio.com/
+#
+
+library(shiny)
+
+# Define server logic required to draw a histogram
+BookPred <- function(m4ood){
+    if (m4ood=="happy") "The art of Happiness by Dalai Lama"
+    else if (m4ood=="sad") "'Little Women' by Louisa May Alcott"
+    else if (m4ood=="alone") "Braving the Wilderness"
+    else if (m4ood=="angry") "the art of letting go"
+    else if (m4ood=="bitchy") "Little Women Louisa May Alcott"
+    else if (m4ood=="blank") "The Harry Potter series by J.K Rowling"
+    else if (m4ood=="confused") "The Power of Now A Guide to Spiritual Enlightenment"
+    else if (m4ood=="depressed") "The Perks of Being a Wallflower by Stephen Chbosky"
+    else if (m4ood=="energetic") "The Great Gatsby, by F Scott Fitzgerald"
+    else if (m4ood=="geeky") "harry potter ny j k rowling"
+    else if (m4ood=="high") "On the Road by beatnik author Jack Kerouac "
+    else if (m4ood=="lazy") "The Untethered Soul: The Journey Beyond Yourself"
+    else if (m4ood=="pleased") "Eleanore Oliphant is Completely Fine by Gail Honeyman."
+}
+
+SitcomPred <- function(m4ovie){
+    if (m4ovie=="action") "Beverly Hills Gun Club"
+    else if (m4ovie=="musicals") "glee"
+    else if (m4ovie=="biopic") "dolemite is my name"
+    else if (m4ovie=="romance") "How i met your mother"
+    else if (m4ovie=="animation") "family Guy"
+    else if (m4ovie=="science fiction") "Rick and morty"
+    else if (m4ovie=="cult") "Broad City."
+    else if (m4ovie=="disaster") "chernobyl diaries"
+    else if (m4ovie=="spy") "Spy"
+    else if (m4ovie=="drama") "The Schitts Creek"
+    else if (m4ovie=="fantasy") "Stranger Things"
+    else if (m4ovie=="thriller") "Mr Robot"
+    else if (m4ovie=="gangster") "thriller park boys"
+    else if (m4ovie=="war") "Rome"
+    else if (m4ovie=="westerns") "Friends"
+    else if (m4ovie=="horror") "Helix"
+}
+
+
+shinyServer(
+    function(input, output) {
+        output$iinputValue <- renderPrint({input$m4ood})
+        output$pprediction <- renderPrint({BookPred(input$m4ood)})
+        
+        output$iinputValue2 <- renderPrint({input$m4ovie})
+        output$pprediction2 <- renderPrint({SitcomPred(input$m4ovie)})
+    }
+)
+```
+
